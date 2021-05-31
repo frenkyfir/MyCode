@@ -20,3 +20,4 @@ echo "<br>";
 echo "sesudah di sorting ";
 print_r(insertion_sort($data));
 ?>
+
