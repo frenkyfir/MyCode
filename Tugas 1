@@ -8,12 +8,11 @@ echo "<br>";
 echo 'ada '.substr_count($string, "Nvidia").' kata Nvidia yang dicari dari kalimat '.$string; #ada berapa kata yg dicari
 echo "<br>";
 echo "<br>";
-$kalimatbaru = array ("Aku","kamu","dan","mereka");
+$kalimatbaru = array ("Aku","kamu","dan","mereka"); 
 echo 'kalimat ';
 print_r($kalimatbaru);
 echo "<br>";
 echo 'setelah di urutkan ';
-asort ($kalimatbaru);
+asort ($kalimatbaru); #untuk mengurutkan array dalam variabel kalimat baru
 print_r($kalimatbaru); 
-
 ?>
