@@ -9,7 +9,6 @@
   <table width=100% border=1 height=100%>
     <tr>
       <td align="center">
-
         <canvas id="myCanvas" width=1600 height="800" style="border:1px solid #d3d3d3;">
           Your browser does not support the HTML5 canvas tag.</canvas>
       </td>
@@ -17,11 +16,8 @@
   </table>
   <button onclick="myVar = setTimeout(bola, 1000)">atur posisi bola</button>
   <button onclick="myVar = setTimeout(jatuh, 1000);timerku()">jatuh</button>
-
-
   <p id="demo"></p>
   <p id="jam"></p>
-
   <form id="frm1" action="/action_page.php">
     1x : <input type="text" name="fname" id="xawal" placeholder="Masukkan Angka x" value=0>
     1y : <input type="text" name="lname" id="yawal" placeholder="Masukkan Angka y" value=350>
@@ -39,9 +35,7 @@
     dy : <input type="text" name="lname" id="dyawal" placeholder="Masukkan Angka y" value=50>
     <br>
   </form>
-
   
-
   <script>
     //https://iwant2study.org/lookangejss/02_newtonianmechanics_2kinematics/ejss_model_freefall01/freefall01_Simulation.xhtml
     //https://www.kompas.com/skola/read/2020/10/05/131821169/gerak-lurus-beraturan-glb-dan-gerak-lurus-berubah-beraturan-glbb?page=all
@@ -54,17 +48,16 @@
       t;
     var canvas = document.getElementById('myCanvas'),
       gerak = true;
+      gerak1= true;
     context = canvas.getContext('2d');
     var width = (canvas.scrollWidth) / 2;
     var height = (canvas.scrollHeight) / 2;
-
     bola();
     caption();
-
     function bola() {
            
       base_image = new Image();
-      base_image.src = 'gambar.png';
+      base_image.src = 'ball.png';
       base_image.onload = function () {
         context.drawImage(base_image, width + x1, height - y1, 50, 50);
         context.beginPath(); 
@@ -79,9 +72,6 @@
       }
       
     }
-
-
-
     function caption() {
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
@@ -95,7 +85,6 @@
         imgData.data[i + 3] = 255;
       }
       ctx.putImageData(imgData, width + 100, height - 100);
-
       var ctx = canvas.getContext("2d");
       ctx.font = "11px Arial";
       ctx.fillText("0", width, height);
@@ -108,7 +97,6 @@
       ctx.fillText("350", width, height - 350);
       ctx.fillText("400", width, height - 400);
     }
-
     function jatuh() {
       if (gerak == true) {
         setInterval(waktu, 10);
@@ -116,33 +104,48 @@
         setInterval(waktu, 10);
       }
     }
-
     function waktu() {
       //gerak();
-      if ((y1 == 20) && (gerak == true)) {
+      if (y1 == 20) {
         gerak = false;
         geseratas();
-      } else if ((y1 == 350) && (gerak == false)) {
+      } else if (y1 == 350) {
         gerak = true;
         geserbawah();
+      } else if (x1 == 750) {
+        setInterval(waktu2, 10);
       } else if (gerak == true) {
         geserbawah();
       } else if (gerak == false) {
         geseratas();
       }
-
     }
-
+    function waktu2() {
+      //gerak();
+      if (y1 == 20) {
+        gerak = false;
+        geserkanan();
+      } else if (y1 == 350) {
+        gerak = true;
+        geserkiri();
+      } else if (x1 == 0) {
+        setInterval(waktu, 10);
+      } else if (gerak == true) {
+        geserkiri();
+      } else if (gerak == false) {
+        geserkanan();
+      }
+    }
     function bersihkan() {
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, c.width, c.height);
       ctx.beginPath();
     }
-
     function geserkanan() {
       myVar = setTimeout(bersihkan, 50)
-      x1++;
+      x1--;
+      y1++;
       
       t = setTimeout(bola, 50);
       text =
@@ -151,17 +154,16 @@
         
       document.getElementById("demo").innerHTML = text;
     }
-
     function geserkiri() {
       myVar = setTimeout(bersihkan, 50)
       x1--;
+      y1--;
       t = setTimeout(bola, 50);
       text =
         "x1 : " + x1 + "<br>" +
         "y1 : " + y1 + "<br>";
       document.getElementById("demo").innerHTML = text;
     }
-
     function geseratas() {
       myVar = setTimeout(bersihkan, 50)
       y1++;
@@ -172,7 +174,6 @@
         "y1 : " + y1 + "<br>";
       document.getElementById("demo").innerHTML = text;
     }
-
     function geserbawah() {
       myVar = setTimeout(bersihkan, 50)
       y1--;
@@ -183,20 +184,14 @@
         "y1 : " + y1 + "<br>";
       document.getElementById("demo").innerHTML = text;
     }
-
     function timerku(){
-
       if (gerak == true) {
         var jam = setInterval(detiks, 1000);
       } else if (gerak == false) {
         clearInterval(jam);
       }
-
     }
-
-
     
-
     function detiks(){
       if ((y1 == 20) && (gerak == true)) {
         gerak = false;
@@ -211,16 +206,12 @@
         //geseratas();
       }
    
-
     
     text =
         "waktu: " + seconds + "<br>";
       document.getElementById("jam").innerHTML = text;
     }
     
-
   </script>
-
 </body>
-
 </html>
